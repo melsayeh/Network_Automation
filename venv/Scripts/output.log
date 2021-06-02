@@ -1,0 +1,202 @@
+CC
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+=============================================================================
+|                         Authorised Access Only                            |
+|         This system is the property of the St Regis Al-Masa Cairo.        |
+|                  All activity on this system is logged.                   |
+|           Disconnect IMMEDIATELY if you are not an authorised user!       |
+=============================================================================
+|                                                                           |
+|                                                                           |
+|                                                                           |
+|                                                                           |
+=============================================================================
+| This System is for the use of authorised users only.Individuals using this|
+| System without authority, or in excess of their authority are subject to  |
+| having all of their activities on this system monitored and recorded  by  |
+| system personnel. In the course of monitoring individuals improperly using|
+| this system, or in course of system maintenance, the activities of        |
+| authorized users may also be monitored.                                   |
+|        Anyone using this system expressly consents to such monitoring and |
+| is advised that if such monitoring reveals possible evidence of criminal  |
+| activity, system personnel may provide the evidence of such monitoring to |
+| law enforcement officials.                                                |
+=============================================================================
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+
+H-NSec-ITR08-SW#terminal width 511
+H-NSec-ITR08-SW#terminal length 0
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#command to access switchterminal width 511
+                  ^
+% Invalid input detected at '^' marker.
+
+H-NSec-ITR08-SW#terminal length 0
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+H-NSec-ITR08-SW(config)#
+H-NSec-ITR08-SW(config)#no service pad
+H-NSec-ITR08-SW(config)#service tcp-keepalives-in
+H-NSec-ITR08-SW(config)#service tcp-keepalives-out
+H-NSec-ITR08-SW(config)#service timestamps debug datetime localtime
+H-NSec-ITR08-SW(config)#service timestamps log datetime localtime
+H-NSec-ITR08-SW(config)#service password-encryption
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#boot-start-marker
+H-NSec-ITR08-SW(config)#boot-end-marker
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#logging buffered errors
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#aaa new-model
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#aaa group server radius Freeradius
+H-NSec-ITR08-SW(config-sg-radius)# server 10.248.243.1 auth-port 1812 acct-port 1813
+H-NSec-ITR08-SW(config-sg-radius)# server-private 10.248.243.1 auth-port 1812 acct-port 1813 key 7 013927160E0D142E33
+H-NSec-ITR08-SW(config-sg-radius)#!
+H-NSec-ITR08-SW(config-sg-radius)#aaa group server radius FreeRadius
+H-NSec-ITR08-SW(config-sg-radius)# server 10.248.243.1 auth-port 1812 acct-port 1813
+H-NSec-ITR08-SW(config-sg-radius)#!
+H-NSec-ITR08-SW(config-sg-radius)#aaa authentication login Freeradius group Freeradius local
+H-NSec-ITR08-SW(config)#aaa authentication enable default group Freeradius enable
+H-NSec-ITR08-SW(config)#aaa authentication dot1x default group FreeRadius
+H-NSec-ITR08-SW(config)#aaa authorization exec Freeradius group Freeradius local
+H-NSec-ITR08-SW(config)#aaa authorization network default group FreeRadius if-authenticated
+H-NSec-ITR08-SW(config)#aaa accounting dot1x default start-stop broadcast group FreeRadius
+H-NSec-ITR08-SW(config)#aaa accounting exec Freeradius start-stop group Freeradius
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#aaa session-id common
+H-NSec-ITR08-SW(config)#udld enable
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#line con 0
+H-NSec-ITR08-SW(config-line)# privilege level 15
+H-NSec-ITR08-SW(config-line)# password 7 0307540515002D6C491D124557
+H-NSec-ITR08-SW(config-line)# logging synchronous
+H-NSec-ITR08-SW(config-line)# stopbits 1
+H-NSec-ITR08-SW(config-line)#line vty 0 4
+H-NSec-ITR08-SW(config-line)# privilege level 15
+H-NSec-ITR08-SW(config-line)# password 7 1158171645160E03113E
+H-NSec-ITR08-SW(config-line)# authorization exec Freeradius
+H-NSec-ITR08-SW(config-line)# accounting exec Freeradius
+H-NSec-ITR08-SW(config-line)# logging synchronous
+H-NSec-ITR08-SW(config-line)# login authentication Freeradius
+H-NSec-ITR08-SW(config-line)# transport input ssh
+H-NSec-ITR08-SW(config-line)# transport output none
+H-NSec-ITR08-SW(config-line)#line vty 5 15
+H-NSec-ITR08-SW(config-line)# privilege level 15
+H-NSec-ITR08-SW(config-line)# password 7 03124F12540C3841
+H-NSec-ITR08-SW(config-line)# authorization exec Freeradius
+H-NSec-ITR08-SW(config-line)# accounting exec Freeradius
+H-NSec-ITR08-SW(config-line)# logging synchronous
+H-NSec-ITR08-SW(config-line)# login authentication Freeradius
+H-NSec-ITR08-SW(config-line)# transport input ssh
+H-NSec-ITR08-SW(config-line)# transport output none
+H-NSec-ITR08-SW(config-line)#!
+H-NSec-ITR08-SW(config-line)#
+H-NSec-ITR08-SW(config-line)#errdisable recovery cause udld
+H-NSec-ITR08-SW(config)#errdisable recovery interval 3600
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#lldp run
+H-NSec-ITR08-SW(config)#
+H-NSec-ITR08-SW(config)#ip classless
+H-NSec-ITR08-SW(config)#no ip http server
+H-NSec-ITR08-SW(config)#no ip http secure-server
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#ip access-list standard ACL_mgmt
+H-NSec-ITR08-SW(config-std-nacl)# permit 10.248.243.1
+% % Duplicate permit statement ignored.
+
+H-NSec-ITR08-SW(config-std-nacl)#!
+H-NSec-ITR08-SW(config-std-nacl)#ip access-list extended ACL_PortIso
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.20.0.0 0.0.255.255 host 172.20.0.1
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.20.0.0 0.0.255.255 host 172.20.0.2
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.20.0.0 0.0.255.255 host 172.20.16.1
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.20.0.0 0.0.255.255 host 172.20.24.1
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.20.0.0 0.0.255.255 host 172.20.48.1
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.31.240.0 0.0.3.255 host 172.31.240.1
+H-NSec-ITR08-SW(config-ext-nacl)# permit udp any eq bootpc host 255.255.255.255 eq bootps
+H-NSec-ITR08-SW(config-ext-nacl)# deny   udp any eq bootps any eq bootpc
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip host 172.20.0.1 172.20.0.0 0.0.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip host 172.20.0.2 172.20.0.0 0.0.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.20.0.0 0.0.255.255 host 224.0.0.251
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.31.240.0 0.0.3.255 host 224.0.0.251
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.19.0.0 0.0.255.255 172.19.255.0 0.0.0.255
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.19.0.0 0.0.255.255 172.19.0.6 0.0.31.0
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.19.0.0 0.0.255.255 172.19.32.6 0.0.15.0
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip 172.19.0.0 0.0.255.255 224.0.0.0 15.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.20.0.0 0.0.255.255 172.16.0.0 0.15.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.20.0.0 0.0.255.255 192.168.0.0 0.0.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.20.0.0 0.0.255.255 10.0.0.0 0.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.20.0.0 0.0.255.255 host 255.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.20.0.0 0.0.255.255 224.0.0.0 15.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.31.240.0 0.0.3.255 172.16.0.0 0.15.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.31.240.0 0.0.3.255 192.168.0.0 0.0.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.31.240.0 0.0.3.255 10.0.0.0 0.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.31.240.0 0.0.3.255 224.0.0.0 15.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.31.240.0 0.0.3.255 host 255.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   udp 172.19.0.0 0.0.255.255 any eq 1900
+H-NSec-ITR08-SW(config-ext-nacl)# deny   udp 172.19.0.0 0.0.255.255 any eq 2869
+H-NSec-ITR08-SW(config-ext-nacl)# deny   tcp 172.19.0.0 0.0.255.255 any eq 2869
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.19.0.0 0.0.255.255 172.16.0.0 0.15.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.19.0.0 0.0.255.255 192.168.0.0 0.0.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.19.0.0 0.0.255.255 10.0.0.0 0.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# deny   ip 172.19.0.0 0.0.255.255 host 255.255.255.255
+H-NSec-ITR08-SW(config-ext-nacl)# permit ip any any
+H-NSec-ITR08-SW(config-ext-nacl)#!
+H-NSec-ITR08-SW(config-ext-nacl)#ip sla enable reaction-alerts
+H-NSec-ITR08-SW(config)#logging trap notifications
+H-NSec-ITR08-SW(config)#logging facility local6
+H-NSec-ITR08-SW(config)#logging source-interface Vlan5
+H-NSec-ITR08-SW(config)#logging 10.248.243.1
+H-NSec-ITR08-SW(config)#
+H-NSec-ITR08-SW(config)#snmp-server group gtk v3 priv read gtk write gtk notify *tv.FFFFFFFF.FFFFFFFF.FFFFFFFF.FFFFFFFF7F access ACL_mgmt
+H-NSec-ITR08-SW(config)#snmp-server view gtk iso included
+H-NSec-ITR08-SW(config)#snmp-server community switchback RO ACL_mgmt
+H-NSec-ITR08-SW(config)#snmp-server community mar3csn RO
+H-NSec-ITR08-SW(config)#snmp-server host 10.248.243.1 version 3 priv gtkadmin
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#banner motd ^CC
+Enter TEXT message.  End with the character '^'.
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+=============================================================================
+|                         Authorised Access Only                            |
+|         This system is the property of the St Regis Al-Masa Cairo.        |
+|                  All activity on this system is logged.                   |
+|           Disconnect IMMEDIATELY if you are not an authorised user!       |
+=============================================================================
+|                                                                           |
+|                                                                           |
+|                                                                           |
+|                                                                           |
+=============================================================================
+| This System is for the use of authorised users only.Individuals using this|
+| System without authority, or in excess of their authority are subject to  |
+| having all of their activities on this system monitored and recorded  by  |
+| system personnel. In the course of monitoring individuals improperly using|
+| this system, or in course of system maintenance, the activities of        |
+| authorized users may also be monitored.                                   |
+|        Anyone using this system expressly consents to such monitoring and |
+| is advised that if such monitoring reveals possible evidence of criminal  |
+| activity, system personnel may provide the evidence of such monitoring to |
+| law enforcement officials.                                                |
+=============================================================================
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+^C
+H-NSec-ITR08-SW(config)#!
+H-NSec-ITR08-SW(config)#
+H-NSec-ITR08-SW(config)#ntp server 10.248.243.1
+H-NSec-ITR08-SW(config)#
+H-NSec-ITR08-SW(config)#end
+H-NSec-ITR08-SW#
+H-NSec-ITR08-SW#

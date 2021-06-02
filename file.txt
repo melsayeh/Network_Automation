@@ -1,0 +1,6 @@
+#########################################################################
+Hello World!
+This file is to use to test reading file in python
+Using multiple lines will ease the process of reading and storing data-
+in forms of lists.
+##########################################################################

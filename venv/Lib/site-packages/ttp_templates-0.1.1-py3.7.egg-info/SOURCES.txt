@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+test/test_ttp_templates_methods.py
+test/test_yang_ietf_interfaces.py
+ttp_templates/__init__.py
+ttp_templates/ttp_templates.py
+ttp_templates.egg-info/PKG-INFO
+ttp_templates.egg-info/SOURCES.txt
+ttp_templates.egg-info/dependency_links.txt
+ttp_templates.egg-info/top_level.txt
+ttp_templates/misc/ttp_templates_tests/cisco_ios_interfaces_cfg_per_ip.txt
+ttp_templates/platform/test_platform_show_run_pipe_sec_interface.txt
+ttp_templates/yang/ietf-interfaces_cisco_ios.txt
