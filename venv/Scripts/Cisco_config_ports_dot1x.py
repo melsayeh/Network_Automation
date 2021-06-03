@@ -94,7 +94,6 @@ with open('/home/switches/switch_interfaces_down.csv','w') as csvfile:
 
 
             except (AuthenticationException):
-                print(username + '/' + password)
                 print('Authentication Failure. Please try again:\n')
                 username = getUsername()
                 password = getPassword()
