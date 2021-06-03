@@ -5,7 +5,7 @@ import meraki
 import os
 
 #Authentication
-API_KEY = '779d718249a9dd57c64529bd2b00b4872c0cdb95'
+API_KEY = 'API_KEY_HERE'
 dashboard = meraki.DashboardAPI(API_KEY)
 
 # Open the workbook and select a worksheet
