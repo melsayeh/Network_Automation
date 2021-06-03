@@ -10,7 +10,7 @@ dashboard = meraki.DashboardAPI(API_KEY)
 
 # Open the workbook and select a worksheet
 # The file header must follow this order: IDF#, Switch_Seq, Switch_SN, Port#, Port_Name, Port_Mode, VLAN_ID, NATIVE_VLAN, ALLOWED_VLANS, Port_Isolation
-wb = load_workbook('D:/OneDrive - Guest-Tek/OneDrive - Guest-Tek Interactive Entertainment Ltd/Projects/BAHTA/PythonScript.xlsx')
+wb = load_workbook('WORKBOOK_PATH_HERE')
 sheet = wb['Sheet3']
 row_count = sheet.max_row
 
