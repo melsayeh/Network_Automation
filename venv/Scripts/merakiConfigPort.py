@@ -5,12 +5,12 @@ import meraki
 import os
 
 #Authentication
-API_KEY = '779d718249a9dd57c64529bd2b00b4872c0cdb95'
+API_KEY = 'API_KEY_HERE'
 dashboard = meraki.DashboardAPI(API_KEY)
 
 # Open the workbook and select a worksheet
 # The file header must follow this order: IDF#, Switch_Seq, Switch_SN, Port#, Port_Name, Port_Mode, VLAN_ID, NATIVE_VLAN, ALLOWED_VLANS, Port_Isolation
-wb = load_workbook('D:/OneDrive - Guest-Tek/OneDrive - Guest-Tek Interactive Entertainment Ltd/Projects/BAHTA/Ports2Python.xlsx')
+wb = load_workbook('/PATH/TO/WORKBOOK')
 sheet = wb['Sheet1']
 row_count = sheet.max_row
 
