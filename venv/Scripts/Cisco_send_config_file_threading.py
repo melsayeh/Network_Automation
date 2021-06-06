@@ -12,12 +12,12 @@ import os
 plateform = 'cisco_ios'
 
 #open switch ip list
-switches = open('D:/Python/Cisco_add_username/ip_list.txt')
+switches = open('/path/tp/switch/list')
 #convert swith list into python list
 switches_list = [switchip.rstrip() for switchip in switches]
 
 #open the config file
-config_file = open('D:\OneDrive - Guest-Tek\OneDrive - Guest-Tek Interactive Entertainment Ltd\Projects\Installation Guides\Switches\cisco_single_command.txt')
+config_file = open('/path/to/config/file')
 
 #convert config file into python list
 command_list = [line.rstrip() for line in config_file]
